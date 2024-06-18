@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+const nextConfig = {
+    reactStrictMode: true,
+    images: {
+      domains: ['picsum.photos'], // Añade otros dominios que necesites
+    },
+  };
+  
+  export default nextConfig;
+  
