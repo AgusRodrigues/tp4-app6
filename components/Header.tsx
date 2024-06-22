@@ -2,20 +2,32 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="bg-gray-800 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold">
-          <Link href="/" legacyBehavior>
-            <a>E-Commerce</a>
-          </Link>
-        </h1>
-        <nav>
-          <Link href="/cart" legacyBehavior>
-            <a className="ml-4">Cart</a>
-          </Link>
-        </nav>
+    <div className="navbar bg-neutral text-neutral-content flex justify-between w-full mb-3 font-sans">
+      <div className="flex-1 m-4">
+        <Link href="/" className="text-xl">
+          E-Commerce
+        </Link>
       </div>
-    </header>
+      <div className="flex-none m-4">
+        <Link href="/cart" legacyBehavior>
+          <a className="btn btn-square btn-ghost">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="inline-block w-5 h-5 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              ></path>
+            </svg>
+          </a>
+        </Link>
+      </div>
+    </div>
   );
 };
 

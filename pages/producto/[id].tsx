@@ -1,47 +1,36 @@
-import { useState, useEffect } from 'react';
-import Header from '../../components/Header';
-import image from "next/image"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Header from "../../components/Header";
+import Image from "next/image";
 
+interface Producto {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+}
 
-interface producto {
-    id: number;
-    title: string;
-    price: number;
-    thumbnail: string;
-  }
-
-  const ProductPage = ({ producto }: { producto: producto }) => {
-    return (
-      <div>
-        <h1>{producto.title}</h1>
-        <p>Price: ${producto.price}</p>
-        <img src={producto.thumbnail} alt={producto.title} />
-      </div>
-    );
-  };
-
-
-const Product = () => {
-    const [producto, setProducto] = useState<producto>({
-        id: 0,
-        title: '',
-        price: 0,
-        thumbnail: '',
-      });
+const ProductPage = () => {
+  const [producto, setProducto] = useState<Producto | null>(null);
+  const router = useRouter();
+  const { id } = router.query;
 
   useEffect(() => {
-    const id = window.location.pathname.split('/').pop();
-    fetch(`https://dummyjson.com/products/${id}`)
-     .then(response => response.json())
-     .then(data => setProducto(data));
-  }, []);
+    if (id) {
+      fetch(`https://dummyjson.com/products/${id}`)
+        .then((response) => response.json())
+        .then((data) => setProducto(data));
+    }
+  }, [id]);
+
+  if (!producto) return <div>Loading...</div>;
 
   return (
     <div>
-        <Header />
-      <main className="container mx-auto py-8">
+      <Header />
+      <main data-theme="luxury" className="container mx-auto py-8">
         <div className="flex flex-col md:flex-row items-center">
-          <img
+          <Image
             src={producto.thumbnail}
             alt={producto.title}
             width={200}
@@ -58,4 +47,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductPage;

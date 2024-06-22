@@ -1,21 +1,30 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import ProductCard from "../components/Producto";
+import ProductCard from "./Producto";
 
 interface Producto {
   id: number;
   title: string;
   price: number;
   thumbnail: string;
-  // add other properties of the producto object here
 }
 
-const Home = () => {
+const getRandomProducts = (products: Producto[], count: number): Producto[] => {
+  const shuffled = products.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
+
+const Grid = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
 
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((response) => response.json())
-      .then((data) => setProductos(data.products));
+      .then((data) => {
+        const randomProducts = getRandomProducts(data.products, 12);
+        setProductos(randomProducts);
+      });
   }, []);
 
   return (
@@ -32,4 +41,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Grid;
