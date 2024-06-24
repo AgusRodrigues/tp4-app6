@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/*import { useState, useEffect } from "react";
 import ProductCard from "../components/Producto";
 
 interface Producto {
@@ -6,14 +6,13 @@ interface Producto {
   title: string;
   price: number;
   thumbnail: string;
-  // add other properties of the producto object here
 }
 
 const Home = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
+    fetch("http://18.225.10.41/v1/productos/consultar")
       .then((response) => response.json())
       .then((data) => setProductos(data.products));
   }, []);
@@ -24,7 +23,7 @@ const Home = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {productos.map((producto) => (
           <div key={producto.id} className="bg-base-100 shadow-xl">
-            <ProductCard />
+            <ProductCard producto={producto} />
           </div>
         ))}
       </div>
@@ -32,4 +31,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home;*/

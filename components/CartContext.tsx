@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { useState, ReactNode } from "react";
 
 interface Producto {
   id: number;
@@ -14,26 +14,25 @@ interface CartContextType {
   addToCart: (producto: Producto) => void;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
-
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart debe ser usado con un CartProvider");
-  }
-  return context;
-};
-
-export const CartProvider = ({ children }: { children: ReactNode }) => {
+export const useCart = (): CartContextType => {
   const [cart, setCart] = useState<Producto[]>([]);
+  console.log('useCart initialized with cart:', cart);
 
   const addToCart = (producto: Producto) => {
     setCart((prevCart) => [...prevCart, producto]);
   };
 
+  return { cart, addToCart };
+};
+
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const cartContext = useCart();
+
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={cartContext}>
       {children}
     </CartContext.Provider>
   );
 };
+
+const CartContext = React.createContext<CartContextType | undefined>(undefined);

@@ -11,24 +11,12 @@ interface Producto {
   price: number;
   thumbnail: string;
 }
+interface ProductoProps {
+  producto: Producto;
+}
 
-const ProductCard = () => {
-  const [producto, setProducto] = useState<Producto | null>(null);
-  const { addToCart } = useCart();
-
-  useEffect(() => {
-    const fetchRandomProduct = async () => {
-      const response = await fetch("https://dummyjson.com/products");
-      const data = await response.json();
-      const randomProduct =
-        data.products[Math.floor(Math.random() * data.products.length)];
-      setProducto(randomProduct);
-    };
-
-    fetchRandomProduct();
-  }, []);
-
-  if (!producto) return <div>Loading...</div>;
+const ProductCard = (prop: ProductoProps) => {
+  const producto = prop.producto;
 
   return (
     <div className="card">
@@ -44,9 +32,6 @@ const ProductCard = () => {
       <div className="card-body">
         <h2 className="card-title">{producto.title}</h2>
         <p className="card-text">${producto.price}</p>
-        <button className="btn btn-primary" onClick={() => addToCart(producto)}>
-          Agregar al Carrito
-        </button>
       </div>
     </div>
   );
