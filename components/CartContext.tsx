@@ -4,9 +4,9 @@ import React, { useState, ReactNode } from "react";
 
 interface Producto {
   id: number;
-  title: string;
-  price: number;
-  thumbnail: string;
+  nombre: string;
+  precio: number;
+  imagen: string;
 }
 
 interface CartContextType {

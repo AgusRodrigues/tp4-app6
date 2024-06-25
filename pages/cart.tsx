@@ -1,4 +1,4 @@
-/*"use client";
+"use client";
 
 import Header from "../components/Header";
 import { useCart } from "../components/CartContext";
@@ -19,14 +19,14 @@ const Cart: React.FC = () => {
             {cart.map((producto) => (
               <div key={producto.id} className="card">
                 <Image
-                  src={producto.thumbnail}
-                  alt={producto.title}
+                  src={producto.imagen}
+                  alt={producto.nombre}
                   width={300}
                   height={300}
                 />
                 <div className="card-body">
-                  <h2 className="card-title">{producto.title}</h2>
-                  <p className="card-text">${producto.price}</p>
+                  <h2 className="card-title">{producto.nombre}</h2>
+                  <p className="card-text">${producto.precio}</p>
                 </div>
               </div>
             ))}
@@ -38,4 +38,3 @@ const Cart: React.FC = () => {
 };
 
 export default Cart;
-*/

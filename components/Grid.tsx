@@ -5,9 +5,9 @@ import ProductCard from "./Producto";
 
 interface Producto {
   id: number;
-  title: string;
-  price: number;
-  thumbnail: string;
+  nombre: string;
+  precio: number;
+  imagen: string;
 }
 
 const getRandomProducts = (products: Producto[], count: number): Producto[] => {
@@ -19,7 +19,7 @@ const Grid = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
+    fetch("http://18.225.10.41/v1/productos/consultar")
       .then((response) => response.json())
       .then((data) => {
         const randomProducts = getRandomProducts(data.products, 12);
