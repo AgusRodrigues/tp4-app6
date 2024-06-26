@@ -11,7 +11,7 @@ const Header = ({ onCartClick }: HeaderProps) => {
     <div className="navbar bg-neutral text-neutral-content flex justify-between w-full mb-3 font-sans">
       <div className="flex-1 m-4">
         <Link href="/" className="text-xl">
-          E-Commerce
+          Animal Design
         </Link>
       </div>
       <div className="flex-none m-4">

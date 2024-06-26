@@ -19,7 +19,7 @@ const Cart: React.FC = () => {
             {cart.map((producto) => (
               <div key={producto.id} className="card">
                 <Image
-                  src={producto.imagen}
+                  src={`http://18.225.10.41/v1/productos/consultarImagen/${producto.id}`}
                   alt={producto.nombre}
                   width={300}
                   height={300}

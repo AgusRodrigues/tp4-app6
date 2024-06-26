@@ -1,5 +1,3 @@
-// pages/index.tsx (o HomePage.tsx)
-
 "use client";
 
 import { useState } from "react";
@@ -18,7 +16,10 @@ export default function Home() {
         <Header onCartClick={() => setCartVisible(true)} />
         <Hero />
         <Grid />
-        <CartModal isVisible={isCartVisible} onClose={() => setCartVisible(false)} />
+        <CartModal
+          isVisible={isCartVisible}
+          onClose={() => setCartVisible(false)}
+        />
       </main>
     </CartProvider>
   );
