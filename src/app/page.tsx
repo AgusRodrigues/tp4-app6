@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <CartProvider>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="min-h-screen flex-col items-center justify-between p-24">
         <Header onCartClick={() => setCartVisible(true)} />
         <Hero />
         <Grid />
