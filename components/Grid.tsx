@@ -9,6 +9,7 @@ interface Producto {
   nombre: string;
   precio: number;
   imagen: string;
+  cantidad: number
 }
 
 const getRandomProducts = (products: Producto[], count: number): Producto[] => {
