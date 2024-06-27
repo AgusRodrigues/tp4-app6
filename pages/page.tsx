@@ -1,22 +1,20 @@
-import { useState, useEffect } from 'react';
-import ProductCard from '../components/Producto';
-
+/*import { useState, useEffect } from "react";
+import ProductCard from "../components/Producto";
 
 interface Producto {
   id: number;
   title: string;
   price: number;
   thumbnail: string;
-  // add other properties of the producto object here
 }
 
 const Home = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
 
   useEffect(() => {
-    fetch('https://dummyjson.com/products')
-   .then(response => response.json())
-   .then(data => setProductos(data.products));
+    fetch("http://18.225.10.41/v1/productos/consultar")
+      .then((response) => response.json())
+      .then((data) => setProductos(data.products));
   }, []);
 
   return (
@@ -34,3 +32,6 @@ const Home = () => {
 };
 
 export default Home;
+https://dummyjson.com/products
+
+*/
