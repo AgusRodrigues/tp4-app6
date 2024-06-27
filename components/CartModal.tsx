@@ -2,12 +2,64 @@
 
 import { useCart } from "./CartContext";
 import Image from "next/image";
+import { useState } from "react";
 
 const CartModal: React.FC<{ isVisible: boolean; onClose: () => void }> = ({
   isVisible,
   onClose,
 }) => {
   const { cart, removeFromCart } = useCart();
+  const [isSending, setIsSending] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSendEmail = async () => {
+    setIsSending(true);
+    setMessage("");
+
+    try {
+      const payload = {
+        nombre: "John Doe",  // Reemplaza con el nombre del usuario
+        direccion: "ort.manu03@gmail.com",  // Reemplaza con la dirección de correo del usuario
+        carrito: {
+          productos_carrito: cart.map(producto => ({
+            id_producto: producto.id,
+            cantidad: producto.cantidad || 1,  // Asegúrate de que cada producto tiene una cantidad
+          })),
+        },
+      };
+
+      console.log("Sending payload:", JSON.stringify(payload)); // Para depuración
+
+      const response = await fetch("http://18.225.10.41/v1/pedido/enviar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error ${response.status}: ${errorText}`);
+      }
+
+      const contentType = response.headers.get("content-type");
+      let data;
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
+
+      setMessage(
+        typeof data === "string" ? data : "Correo enviado exitosamente"
+      );
+    } catch (error: any) {
+      setMessage(`Error al enviar el correo: ${error.message}`);
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <div className={`fixed inset-0 z-50 ${isVisible ? "" : "hidden"}`}>
@@ -63,9 +115,22 @@ const CartModal: React.FC<{ isVisible: boolean; onClose: () => void }> = ({
               ))}
             </div>
           )}
-          <button onClick={onClose} className="btn btn-secondary mt-4">
-            Cerrar
-          </button>
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={onClose}
+              className="btn btn-secondary mr-2 py-2 px-4 bg-gray-500 text-white rounded"
+            >
+              Cerrar
+            </button>
+            <button
+              onClick={handleSendEmail}
+              className="btn btn-primary py-2 px-4 bg-blue-500 text-white rounded"
+              disabled={isSending}
+            >
+              {isSending ? "Enviando..." : "Enviar Pedido"}
+            </button>
+          </div>
+          {message && <p className="mt-2 text-black">{message}</p>}
         </div>
       </div>
     </div>

@@ -27,6 +27,7 @@ const ProductCard = ({ producto }: ProductoProps) => {
     setLightboxOpen(false);
   };
 
+
   return (
     <div className="card">
       <div className="image-container cursor-pointer">
